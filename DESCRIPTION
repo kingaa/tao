@@ -1,0 +1,11 @@
+Package: tao
+Version: 1.1.1
+Date: 2020-04-01
+Title: The Great Tao Package
+Author: Lao Tsu, Aaron A. King, Bruce E. Kendall, Stephen P. Ellner
+Maintainer: Aaron A. King <kingaa@umich.edu>
+Depends: R(>= 3.0.0)
+Description: The package that can be described is not the Tao package.
+License: GPL-3
+Encoding: UTF-8
+RoxygenNote: 7.1.0
