@@ -1,5 +1,4 @@
 # tao
-## the Great Tao Package
 
 The package that can be documented is not the eternal package  
 The procedure that terminates is not the eternal procedure  
