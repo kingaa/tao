@@ -1,7 +1,7 @@
 Package: tao
 Version: 1.0-1
 Date: 2014-04-01
-Title: The great Tao package
+Title: The Great Tao Package
 Author: Lao Tsu, Aaron A. King, Bruce E. Kendall, Stephen P. Ellner
 Maintainer: Aaron A. King <kingaa@umich.edu>
 Depends: R(>= 3.0.0)
