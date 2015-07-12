@@ -1,7 +1,7 @@
 \name{do.nothing}
 \alias{do.nothing}
 \alias{do.nothing.else}
-\title{Do nothing, do not do nothing.}
+\title{Do nothing, do nothing but nothing.}
 \description{
   Nothing is done, nothing is left undone.
 }
