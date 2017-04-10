@@ -8,4 +8,4 @@ Thus, constantly without desire, one observes the runtime errors
 Constantly with desire, one observes the progress bar  
 These two emerge together but differ in name  
 Their unity is said to be a mystery  
-Mystery of mysteries, the door to full employment  
+Mystery of mysteries, the door to endless revisions  
