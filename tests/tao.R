@@ -1,0 +1,3 @@
+library(tao)
+
+do.nothing()
