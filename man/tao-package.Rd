@@ -8,10 +8,15 @@
 The package that can be described is not the great Tao package.
 }
 \details{
-Without opening your door, you can open your heart to the world.\cr
-Without looking out your window, you can see the essence of the Tao.\cr
-The more you know, the less you understand.\cr
-The Master arrives without leaving, sees the light without looking, achieves without doing a thing.
+The package that can be documented is not the eternal package \cr
+The procedure that terminates is not the eternal procedure \cr
+The undocumented is the origin of feature and bug \cr
+The documentation is the mother of limitless confusion \cr
+Thus, constantly without desire, one observes the runtime errors \cr
+Constantly with desire, one observes the progress bar \cr
+These two emerge together but differ in name \cr
+Their unity is said to be a mystery \cr
+Mystery of mysteries, the door to the next revision \cr
 }
 \references{
 Lao Tsu, Tao Te Ching.

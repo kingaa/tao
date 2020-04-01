@@ -11,19 +11,17 @@ do.nothing(...)
 \item{\dots}{Arguments avail not.}
 }
 \value{
+If nothing is done, then all will be well.
+
 Practice not-doing, and everything will fall into place.
 }
 \description{
 Nothing is done, nothing is left undone.
 }
-\details{
-If nothing is done, then all will be well.
-}
 \examples{
-
 do.nothing()
 \dontrun{
-do.nothing.else()
+  do.nothing.else()
 }
 
 }
