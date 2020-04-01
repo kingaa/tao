@@ -3,9 +3,11 @@
 \name{do.nothing}
 \alias{do.nothing}
 \alias{do.nothing.else}
-\title{Do nothing, do nothing but nothing.}
+\title{Nothing is done, nothing is left undone.}
 \usage{
 do.nothing(...)
+
+do.nothing.else(...)
 }
 \arguments{
 \item{\dots}{Arguments avail not.}
