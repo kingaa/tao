@@ -127,6 +127,8 @@ library/$(PKG): dist
 	mkdir -p library
 	$(RCMD) INSTALL --library=library $(PKGVERS).tar.gz
 
+fresh: clean remove
+
 remove:
 	-$(RCMD) REMOVE --library=library $(PKG)
 

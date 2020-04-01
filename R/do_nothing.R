@@ -1,9 +1,4 @@
-##' Do nothing, do nothing but nothing.
-##' 
 ##' Nothing is done, nothing is left undone.
-##' 
-##' @aliases do.nothing do.nothing.else
-##' @rdname do_nothing
 ##' 
 ##' @param \dots Arguments avail not.
 ##' 
@@ -20,10 +15,14 @@
 ##'   do.nothing.else()
 ##' }
 ##'
+##' @name do.nothing
+##' @rdname do_nothing
 ##' @export
 ##' 
 do.nothing <- function (...) invisible(NULL)
 
+##' @name do.nothing.else
+##' @rdname do_nothing
 ##' @export
 ##' 
 do.nothing.else <- function (...) {
