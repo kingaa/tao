@@ -14,7 +14,7 @@ Mystery of mysteries, the door to the next revision
 
 ---------------------
 
-Manual: [(PDF)](https://kingaa.github.io/manuals/tao.pdf)  
+Manual: [(HTML)](https://kingaa.github.io/manuals/tao/html/00Index.html) [(PDF)](https://kingaa.github.io/manuals/tao/tao.pdf)  
 Install: `install.packages("tao",repos="https://kingaa.github.io")`  
 
 ---------------------

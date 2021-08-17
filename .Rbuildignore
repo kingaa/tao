@@ -16,6 +16,7 @@ TODO\.md$
 ^\.Rproj\.user$
 \.Rprofile
 Makefile
+rules.mk
 lib
 library
 check
@@ -24,4 +25,5 @@ www
 ^(.+?)\.tar\.gz
 ^(.+?)\.tgz
 ^(.+?)\.zip
-hub_cov\.R
+covr\.rds
+covr\.html

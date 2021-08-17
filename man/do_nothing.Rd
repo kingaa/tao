@@ -3,7 +3,7 @@
 \name{do.nothing}
 \alias{do.nothing}
 \alias{do.nothing.else}
-\title{Nothing is done, nothing is left undone.}
+\title{If nothing is done, then all will be well.}
 \usage{
 do.nothing(...)
 
@@ -13,9 +13,10 @@ do.nothing.else(...)
 \item{\dots}{Arguments avail not.}
 }
 \value{
-If nothing is done, then all will be well.
-
-Practice not-doing, and everything will fall into place.
+What difference between yes and no? \cr
+What difference between success and failure? \cr
+Must you value what others value, avoid what others avoid? \cr
+How ridiculous! \cr
 }
 \description{
 Nothing is done, nothing is left undone.
@@ -25,7 +26,6 @@ do.nothing()
 \dontrun{
   do.nothing.else()
 }
-
 }
 \author{
 Lao Tsu, Aaron A. King

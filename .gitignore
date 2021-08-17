@@ -1,4 +1,3 @@
-.gitignore
 .Rhistory
 .Rproj.user
 *.tar.gz
@@ -16,4 +15,5 @@ www
 *.pdf
 inst/doc/figure
 inst/doc/cache
-hub_cov.R
+covr.html
+covr.rds

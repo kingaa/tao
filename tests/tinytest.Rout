@@ -15,7 +15,11 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> library(tao)
 > 
-> do.nothing()
+> if ( requireNamespace("tinytest", quietly=TRUE) ){
++   tinytest::test_package("tao")
++ }
+test-roxytest-tests-do_nothing.R    1 tests [0;32mOK[0m test-roxytest-tests-do_nothing.R    2 tests [0;32mOK[0m test-roxytest-tests-do_nothing.R    3 tests [0;32mOK[0m [0;34m0.1s[0m
+All ok, 3 results (0.1s)
+> 
 > 
