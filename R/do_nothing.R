@@ -33,7 +33,7 @@ do.nothing <- function (...) invisible(NULL)
 ##' }
 ##' @tests
 ##' expect_error({
-##'   setTimeLimit(elapsed=0.1,cpu=0.1)
+##'   setTimeLimit(elapsed=0.1)
 ##'   do.nothing.else()
 ##' },
 ##' pattern="reached elapsed time limit"

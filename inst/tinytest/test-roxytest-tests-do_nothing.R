@@ -9,7 +9,7 @@ expect_null(do.nothing("yowza!"))
 
 ## Function do.nothing.else() @ L43
 expect_error({
-  setTimeLimit(elapsed=0.1,cpu=0.1)
+  setTimeLimit(elapsed=0.1)
   do.nothing.else()
 },
 pattern="reached elapsed time limit"
