@@ -18,9 +18,11 @@
 ##' @rdname do_nothing
 ##' @examples
 ##' do.nothing()
+##' 
 ##' @tests
 ##' expect_null(do.nothing())
 ##' expect_null(do.nothing("yowza!"))
+##' 
 ##' @export
 ##' 
 do.nothing <- function (...) invisible(NULL)

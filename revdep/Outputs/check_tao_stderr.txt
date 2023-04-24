@@ -1,0 +1,5 @@
+  Running ‘tao.R’
+  Comparing ‘tao.Rout’ to ‘tao.Rout.save’ ... OK
+  Running ‘tinytest.R’
+
+

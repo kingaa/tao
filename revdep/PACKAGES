@@ -1,0 +1,7 @@
+Package: tao
+Version: 1.1.1
+Depends: R(>= 3.0.0)
+Suggests: tinytest
+License: GPL-3
+MD5sum: 7321bdc208f14a3a28470d7204e0ea57
+NeedsCompilation: no

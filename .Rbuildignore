@@ -1,3 +1,5 @@
+revdep
+tools
 examples
 tests/Makefile
 tests/(.+?)\.png$
@@ -7,8 +9,9 @@ inst/doc/Makefile
 inst/doc/(.+?).md
 inst/doc/(.+?).Rmd
 man/roxygen
+Doxyfile
 LICENSE\.md$
-README\.md$
+README\.(.?)$
 CRAN\.md$
 TODO\.md$
 ^\.gitignore$
@@ -31,8 +34,10 @@ TODO\.md$
 \.tests
 Makefile
 rules.mk
+yaml
 scripts
 lib
+libs
 library
 check
 www
@@ -40,6 +45,5 @@ www
 ^(.+?)\.tar\.gz
 ^(.+?)\.tgz
 ^(.+?)\.zip
-hub_cov\.R
 covr.html
 covr.rds

@@ -23,6 +23,7 @@ Nothing is done, nothing is left undone.
 }
 \examples{
 do.nothing()
+
 \dontrun{
   do.nothing.else()
 }
