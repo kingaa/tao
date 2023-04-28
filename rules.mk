@@ -15,16 +15,14 @@ PKG = $(shell perl -ne 'print $$1 if /Package:\s+((\w+[-\.]?)+)/;' DESCRIPTION)
 VERSION = $(shell perl -ne 'print $$1 if /Version:\s+((\d+[-\.]?)+)/;' DESCRIPTION)
 PKGVERS = $(PKG)_$(VERSION)
 TARBALL = $(PKGVERS).tar.gz
-SOURCE = $(sort $(wildcard R/*R src/*.c src/*.h data/* examples/*))
+SOURCE = $(sort $(wildcard R/*R src/*.c src/*.cc src/*.h data/* examples/*))
 CSOURCE = $(sort $(wildcard src/*.c))
 TESTS = $(sort $(wildcard tests/*R))
 INSTDOCS = $(sort $(wildcard inst/doc/*))
-SESSION_PKGS = datasets,utils,grDevices,graphics,stats,methods,tidyverse,$(PKG)
 
 .PHONY: .check check clean covr debug default fresh \
-htmlhelp manual publish qcheck qqcheck \
-revdeps rhub rsession session www win wind xcheck \
-xcovr vcheck ycheck
+htmlhelp manual publish qcheck qqcheck rchk revdeps \
+rhub rsession session www win wind xcheck xcovr vcheck ycheck
 
 .dist manual www: export R_QPDF=qpdf
 .headers: export LC_COLLATE=C
@@ -33,12 +31,16 @@ xcovr vcheck ycheck
 .dist .tests .session .check: export R_KEEP_PKG_SOURCE=yes
 revdeps .session .tests .check: export R_PROFILE_USER=$(CURDIR)/.Rprofile
 .tests .session vcheck www manual: export R_LIBS=$(CURDIR)/library
+debug .check: export PKG_CPPFLAGS=-UNDEBUG
 .check: export R_CHECK_ENVIRON=$(CURDIR)/tools/check.env
 session: RSESSION = emacs -f R
 debug: RSESSION = R -d gdb
 rsession: RSESSION = R
 
 default: .roxy .NEWS .instdocs .source .includes .headers
+	@echo $(PKGVERS)
+
+version:
 	@echo $(PKGVERS)
 
 roxy: .roxy
@@ -56,8 +58,7 @@ qcheck: CHECK = devtools::check($(COMMON_CHECK_ARGS),cran=FALSE,\
 args=c("--no-tests"))
 qqcheck: CHECK = devtools::check($(COMMON_CHECK_ARGS),cran=FALSE,\
 args=c("--no-tests","--no-codoc","--no-examples"))
-xcheck: CHECK = devtools::check($(COMMON_CHECK_ARGS),cran=TRUE,\
-env_vars=c("_R_CHECK_DEPENDS_ONLY_"="TRUE"))
+xcheck: CHECK = devtools::check($(COMMON_CHECK_ARGS),cran=TRUE)
 ycheck: CHECK = devtools::check($(COMMON_CHECK_ARGS),cran=TRUE,\
 args=c("--run-dontrun","--run-donttest"))
 
@@ -65,9 +66,9 @@ INSTALLCMD = devtools::install(args=c("--preclean","--html","--library=library")
 
 check xcheck ycheck qcheck qqcheck: .check
 
-vcheck: check/$(PKG).Rcheck/$(PKG)-Ex.R
+vcheck: check 
 	$(REXE) -d "valgrind -s --tool=memcheck --track-origins=yes --leak-check=full"\
-	< $^ 2>&1 | tee $(PKG)-Ex.Rout
+	< check/$(PKG).Rcheck/$(PKG)-Ex.R 2>&1 | tee $(PKG)-Ex.Rout
 
 NEWS: .NEWS
 
@@ -115,6 +116,8 @@ inst/NEWS: inst/NEWS.Rd
 	$(RCMD) Rdconv -t txt $^ -o $@
 
 htmlhelp: install manual
+	mkdir -p $(MANUALDIR)/source
+	doxygen
 	rsync --delete -a library/$(PKG)/html/ $(MANUALDIR)/html
 	rsync --delete --exclude=aliases.rds --exclude=paths.rds --exclude=$(PKG).rdb --exclude=$(PKG).rdx --exclude=macros -a library/$(PKG)/help/ $(MANUALDIR)/help
 	(cd $(MANUALDIR); (cat links.ed && echo w ) | ed - html/00Index.html)
@@ -126,15 +129,23 @@ www: install
 
 session debug rsession: .session
 
+rchk: .rchk
+
+.rchk: .dist
+	mkdir -p rchk
+	$(CP) $(TARBALL) rchk
+	docker run -v $(PWD)/rchk:/rchk/packages kalibera/rchk:latest /rchk/packages/$(TARBALL) | tee rchk.out
+
 revdeps: .dist
 	mkdir -p revdep
 	$(CP) $(TARBALL) revdep
 	$(REXE) -e "tools::check_packages_in_dir(\"revdep\",check_args=\"--as-cran\",reverse=list(which=\"most\"))"
 
-publish: dist manual htmlhelp
+publish: dist manual htmlhelp www
 	$(REXE) -e 'drat::insertPackage("$(PKGVERS).tar.gz",repodir="$(REPODIR)",action="prune")'
 	-$(REXE) -e 'drat::insertPackage("$(PKGVERS).tgz",repodir="$(REPODIR)",action="prune")'
 	-$(REXE) -e 'drat::insertPackage("$(PKGVERS).zip",repodir="$(REPODIR)",action="prune")'
+	$(MAKE) -C www publish
 
 rhub:
 	$(REXE) -e 'library(rhub); check_for_cran(); check_on_windows(); check(platform="macos-highsierra-release-cran");'
@@ -142,10 +153,13 @@ rhub:
 covr: covr.rds
 
 covr.rds: DESCRIPTION
-	$(REXE) -e 'library(covr); package_coverage(type="all") -> cov; report(cov,file="covr.html",browse=TRUE); saveRDS(cov,file="covr.rds")'
+	$(REXE) -e 'library(covr); package_coverage(type="all") -> cov; saveRDS(cov,file="covr.rds")'
 
 xcovr: covr
 	$(REXE) -e 'library(covr); readRDS("covr.rds") -> cov; codecov(coverage=cov,quiet=FALSE)'
+
+vcovr: covr
+	$(REXE) -e 'library(covr); readRDS("covr.rds") -> cov; report(cov,file="covr.html",browse=TRUE)'
 
 win: dist
 	curl -T $(TARBALL) ftp://win-builder.r-project.org/R-release/
@@ -168,7 +182,7 @@ tests: .tests
 install: .install
 
 inst/include/%.h: src/%.h
-	$(CP) $^ $@
+	perl -ne 'print if not /^\/\/\!/' $^ > $@
 
 %.tex: %.Rnw
 	$(REXE) -e "library(knitr); knit(\"$*.Rnw\")"
@@ -216,4 +230,4 @@ clean:
 fresh: clean
 	$(RM) .headers .includes .NEWS .instdocs
 	$(RM) .install .roxy .source .testsource .roxy .tests
-	$(RM) -r library
+	$(RM) -r library rchk

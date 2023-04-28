@@ -2,6 +2,7 @@
 % Please edit documentation in R/tao-package.R
 \docType{package}
 \name{tao-package}
+\alias{tao}
 \alias{tao-package}
 \title{That which cannot be packaged.}
 \description{
